@@ -228,3 +228,42 @@ void Bank::displayAllAccounts()
         acc.display();
     }
 }
+// Load all accounts from file
+void Bank::loadAccounts()
+{
+    accounts.clear();
+
+    ifstream file("accounts.txt");
+
+    if (!file)
+    {
+        // File doesn't exist yet
+        return;
+    }
+
+    string line;
+
+    while (getline(file, line))
+    {
+        if (line.empty())
+            continue;
+
+        stringstream ss(line);
+
+        string accNoStr, name, pin, balanceStr;
+
+        getline(ss, accNoStr, ',');
+        getline(ss, name, ',');
+        getline(ss, pin, ',');
+        getline(ss, balanceStr);
+
+        int accNo = stoi(accNoStr);
+        double balance = stod(balanceStr);
+
+        Account acc(accNo, name, pin, balance);
+
+        accounts.push_back(acc);
+    }
+
+    file.close();
+}
