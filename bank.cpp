@@ -5,7 +5,6 @@
 #include <sstream>
 
 using namespace std;
-using namespace std;
 
 // Search account by account number
 int Bank::findAccount(int accountNumber)
